@@ -1,0 +1,56 @@
+<div class="w-75 mx-auto my-5 card shadow-sm p-3">
+  <a class="nav-link my-2 text-primary" routerLink="/authors">
+    <i class="fa-solid fa-chevron-left"></i> back</a
+  >
+
+  <h2>{{ isEditMode ? "Edit Author" : "Add Author" }}</h2>
+  <form (ngSubmit)="saveAuthor()">
+    <div class="my-2">
+      <label class="form-label">Name:</label>
+      <input
+        class="form-control"
+        [(ngModel)]="author.name"
+        name="title"
+        required
+      />
+    </div>
+    <div class="my-2">
+      <label class="form-label">Bio:</label>
+      <textarea
+        class="form-control"
+        [(ngModel)]="author.bio"
+        name="content"
+        required
+      ></textarea>
+    </div>
+
+    <div class="my-2">
+      <label class="form-label">Books:</label>
+      <mat-form-field>
+        <mat-label>Books:</mat-label>
+        <mat-select
+          [(ngModel)]="author.books"
+          multiple
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <mat-option *ngFor="let book of books" [value]="book._id">{{
+            book.title
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="my-2">
+      <label class="form-label">Birth Date</label>
+      <input
+        class="form-control"
+        [(ngModel)]="author.birthDAte"
+        name="publishedDate"
+        type="date"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary my-4 ms-auto d-block">
+      {{ isEditMode ? "Update" : "Create" }}
+    </button>
+  </form>
+</div>

@@ -1,0 +1,18 @@
+<div class="card mx-auto w-50 my-4 shadow-sm" *ngIf="book">
+  <div class="card-body">
+    <a class="nav-link my-2 text-primary" routerLink="/books"> <i class="fa-solid fa-chevron-left"></i> back</a>
+
+    <h4 class="card-title">{{ book.title }}</h4>
+    <span class="card-subtitle mb-2 text-muted">{{
+      book.publishedDate | date
+    }}</span>
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <p><strong>Content:</strong> {{ book.content }}</p>
+    <div class="d-flex justify-content-end">
+      <a class="btn btn-primary mx-2" [routerLink]="['/edit-book', book._id]"
+        >Edit</a
+      >
+      <button class="btn btn-danger" (click)="deleteBook()">Delete</button>
+    </div>
+  </div>
+</div>

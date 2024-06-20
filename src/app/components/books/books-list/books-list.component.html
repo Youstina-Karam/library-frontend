@@ -1,0 +1,61 @@
+<div class="container">
+  <h2 class="my-4"><i class="fa-solid fa-book-open-reader"></i> Books List</h2>
+  <a class="btn btn-primary d-block w-25 ms-auto my-2" routerLink="/add-book"><i class="fa-solid fa-plus px-2"></i> Add new book</a>
+  <div class="row">
+    <div class="col-md-4 position-relative">
+      <input class="col-md-4 form-control my-2" [(ngModel)]="title" placeholder="Search by title" (keyup)="searchByTitle($event)"/> 
+      <i class="searchIcon fa-solid fa-magnifying-glass "></i>
+    </div>
+    <div class="col-md-4 position-relative">
+      <input class="col-md-4 form-control my-2" [(ngModel)]="author" placeholder="Search by author" (keyup)="searchByAuthor($event)"/>
+       <i class="searchIcon fa-solid fa-magnifying-glass"></i>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped shadow-sm my-4">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Published Date</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books; let i = index">
+          <th scope="row">{{ i +1 }}</th>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.publishedDate | date }}</td>
+          <td><button class="btn btn-primary" (click)="showBookDetails(book._id)">
+            show
+          </button></td>
+          <td><button class="btn btn-danger" (click)="deleteBook(book._id)">
+            delete
+          </button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+      <li class="page-item">
+        <button class="page-link" aria-label="Previous" (click)="changePage(currentPage - 1)"
+        [disabled]="currentPage === 1">
+          <span aria-hidden="true">&laquo;</span>
+        </button>
+      </li>
+      <li class="page-item">{{ currentPage }} of {{ totalPages }}</li>
+      <li class="page-item">
+        <button class="page-link"aria-label="Next"(click)="changePage(currentPage + 1)"
+        [disabled]="currentPage === totalPages" >
+          <span aria-hidden="true">&raquo;</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>
+
